@@ -11,6 +11,7 @@ export default class CreateTodo extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
+            listing_name: '',
             listing_description: '',
             listing_location: '',
             listing_link: '',
@@ -34,6 +35,13 @@ export default class CreateTodo extends Component {
             listing_link: e.target.value
         });
     }
+    
+     onChangeListingName(e) {
+        this.setState({
+            listing_name e.target.value
+        });
+    }
+
 
     onSubmit(e) {
         e.preventDefault();
@@ -42,8 +50,10 @@ export default class CreateTodo extends Component {
         console.log(`Listing Description: ${this.state.listing_description}`);
         console.log(`Listing Location: ${this.state.listing_location}`);
         console.log(`Listing Link: ${this.state.listing_link}`);
+        console.log(`Listing Name: ${this.state.listing_name}`);
 
         this.setState({
+            listing_name: '',
             listing_description: '',
             listing_location: '',
             listing_link: '',
@@ -55,6 +65,14 @@ export default class CreateTodo extends Component {
             <div style={{marginTop: 20}}>
                 <h3>Create New Todo</h3>
                 <form onSubmit={this.onSubmit}>
+                   <div className="form-group">
+                        <label>Name: </label>
+                        <input  type="text"
+                                className="form-control"
+                                value={this.state.listing_name}
+                                onChange={this.onChangeListingName}
+                                />
+                    </div>
                     <div className="form-group">
                         <label>Description: </label>
                         <input  type="text"
