@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from 'axios';
 
 export default class CreateTodo extends Component {
 
@@ -17,7 +18,7 @@ export default class CreateTodo extends Component {
             listing_link: '',
         }
     }
-
+    
     onChangeListingDescription(e) {
         this.setState({
             listing_description e.target.value
@@ -51,6 +52,16 @@ export default class CreateTodo extends Component {
         console.log(`Listing Location: ${this.state.listing_location}`);
         console.log(`Listing Link: ${this.state.listing_link}`);
         console.log(`Listing Name: ${this.state.listing_name}`);
+        
+        const newListing = {
+            listing_name: this.state.listing_name,
+            listing_description: this.state.listing_description,
+            listing_link: this.state.listing_link,
+            listing_location: this.state.listing_location
+        }
+
+        axios.post('http://localhost:4000/listings/add', newListing)
+            .then(res => console.log(res.data));
 
         this.setState({
             listing_name: '',
